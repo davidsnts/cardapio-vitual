@@ -6,18 +6,20 @@ import ProdutoSelecionado from './pages/ProdutoSelecionado';
 import Login from './pages/Login';
 import Register from './pages/Register'
 import NotFound from './components/NotFound';
+import { AuthProvider } from './Context/AuthContext';
 function App() {
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path="/produto" element={<ProdutoSelecionado />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/cadastrar' element={<Register />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-
+      <AuthProvider>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path="/produto" element={<ProdutoSelecionado />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/cadastrar' element={<Register />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AuthProvider>
     </>
   );
 }

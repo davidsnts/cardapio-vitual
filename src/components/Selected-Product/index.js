@@ -1,21 +1,15 @@
-import { useSearchParams } from "react-router-dom";
+import React from 'react'
 
-const ProdutoSelecionado = () => {
-    const [searchParams] = useSearchParams();
-
-    const nome = searchParams.get("nome");
-    const preco = searchParams.get("preco");
-    const itens = JSON.parse(decodeURIComponent(searchParams.get("itens")));
-        
+const SelectedProduct = ({ produto }) => {
     return (
         <div className="p-5 flex flex-col justify-center items-center  ">
             <div className="border border-slate-400 p-5 rounded-lg shadow-2xl">
                 <h2 className="text-2xl font-bold color-primary">Produto Selecionado</h2>
-                <p className="text-center font-bold text-slate-700 text-2xl">{nome}</p>
+                <p className="text-center font-bold text-slate-700 text-2xl">{produto.nome}</p>
 
                 <h3 className="mt-3 font-semibold">Itens:</h3>
                 <ul className="list-disc list-inside">
-                    {itens.map((item, idx) => (
+                    {produto.complementos.map((item, idx) => (
                         <li key={idx}>{item.nome}</li>
                     ))}
                 </ul>
@@ -28,12 +22,12 @@ const ProdutoSelecionado = () => {
 
 
                 <div className="flex gap-5 items-center">
-                    <p>Preço: R$ {preco}</p>
+                    <p>Preço: R$ {produto.valor}</p>
                     <button className="bg-primary text-white font-bold p-2 rounded-md">Salvar no carrinho</button>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default ProdutoSelecionado;
+export default SelectedProduct
