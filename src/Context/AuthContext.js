@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
         const userInfo = localStorage.getItem('userInfo')
         if (userInfo) {
             setUserLogged(true)
-            setUser(JSON.parse(userInfo)) // transforma a string em objeto
+            setUser(JSON.parse(userInfo))
         } else {
             setUserLogged(false)
             setUser({})
@@ -32,11 +32,17 @@ const AuthProvider = ({ children }) => {
                 body: JSON.stringify(inputValues)
             }
         );
-        const data = JSON.stringify(await response.json());
-        localStorage.setItem('userInfo', data);
-        setUserLogged(true);
-        setUser(JSON.parse(data));
-        navigate("/");
+        const responseFormatado = await response.json()
+        const data = JSON.stringify(responseFormatado);
+        if (responseFormatado.nome) {
+            localStorage.setItem('userInfo', data);
+            setUserLogged(true);
+            setUser(JSON.parse(data));
+            navigate("/");
+        }else(
+            navigate("/cadastrar")
+        )
+
     }
 
     const logoutUser = async () => {

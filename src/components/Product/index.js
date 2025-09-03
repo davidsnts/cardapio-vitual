@@ -5,7 +5,7 @@ const Product = ({ produto }) => {
   
   const handleClick = () => {
     const itensStr = encodeURIComponent(JSON.stringify(produto.complementos));
-    navigate(`/produto?nome=${produto.nome}&preco=${produto.valor}&itens=${itensStr}`);
+    navigate(`/produto/${produto._id}`);
   };
 
   return (
